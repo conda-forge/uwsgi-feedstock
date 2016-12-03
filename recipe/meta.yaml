@@ -21,6 +21,7 @@ build:
 requirements:
   build:
     - python
+    - setuptools
     # - jansson  # a json parser library that should be added once available as a conda package
     - libxml2  # [unix]
     - openssl 1.0.*
