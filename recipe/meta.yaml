@@ -14,7 +14,7 @@ source:
     #    remove for version >2.0.12
 
 build:
-  number: 0
+  number: 1
   detect_binary_files_with_prefix: true
   skip: true  # [win]
 
