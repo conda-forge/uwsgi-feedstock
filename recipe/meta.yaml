@@ -1,49 +1,48 @@
-{% set version = "2.0.12" %}
+{% set version = "2.0.15" %}
 
 package:
   name: uwsgi
-  version: '{{ version }}'
+  version: {{ version }}
 
 source:
-  fn: "uwsgi-{{ version }}.tar.gz"
-  url: "https://pypi.io/packages/source/u/uWSGI/uwsgi-{{ version }}.tar.gz"
-  md5: 1451cab954bad0d7d7429e4d2c84b5df
-  patches:
-    - darwin.patch  # [osx]
-    # ^^ darwin.patch from https://github.com/unbit/uwsgi/commit/cf62d9f8ca6c9d0d64eaddb45534c8db27978af3
-    #    remove for version >2.0.12
+  url: https://pypi.io/packages/source/u/uWSGI/uwsgi-{{ version }}.tar.gz
+  sha256: 572ef9696b97595b4f44f6198fe8c06e6f4e6351d930d22e5330b071391272ff
 
 build:
   number: 0
+  skip: True  # [win]
   detect_binary_files_with_prefix: true
-  skip: true  # [win]
 
 requirements:
   build:
     - python
-    # - jansson  # a json parser library that should be added once available as a conda package
-    - libxml2  # [unix]
+    - setuptools
+    - jansson
+    - libxml2 2.9.*  # [not win]
     - openssl 1.0.*
     - pcre
     - yaml
-    - zlib 1.2*
+    - zlib 1.2.8
   run:
     - python
-    # - jansson
-    - libxml2  # [unix]
+    - jansson
+    - libxml2 2.9.*  # [not win]
     - openssl 1.0.*
     - pcre
     - yaml
-    - zlib 1.2*
+    - zlib 1.2.8
 
 test:
+  source_files:
+    - .
   commands:
     - uwsgi --version
 
 about:
   home: https://github.com/unbit/uwsgi
-  license: GPL2
-  summary: >
+  license: GPL-2.0
+  license_file: LICENSE
+  summary: |
     The uWSGI project aims at developing a full stack for building hosting
     services. Application servers (for various programming languages and
     protocols), proxies, process managers and monitors are all implemented.
@@ -51,3 +50,4 @@ about:
 extra:
   recipe-maintainers:
     - kalefranz
+    - ocefpaf
