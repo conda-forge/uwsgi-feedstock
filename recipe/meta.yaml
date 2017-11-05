@@ -9,7 +9,7 @@ source:
   sha256: 572ef9696b97595b4f44f6198fe8c06e6f4e6351d930d22e5330b071391272ff
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
   detect_binary_files_with_prefix: true
 
@@ -30,13 +30,15 @@ requirements:
     - openssl 1.0.*
     - pcre
     - yaml
-    - zlib 1.2.8
+    - zlib 1.2.11
 
 test:
   source_files:
     - .
   commands:
     - uwsgi --version
+    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: https://github.com/unbit/uwsgi
