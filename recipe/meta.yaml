@@ -9,7 +9,7 @@ source:
   sha256: 572ef9696b97595b4f44f6198fe8c06e6f4e6351d930d22e5330b071391272ff
 
 build:
-  number: 1
+  number: 2
   skip: True  # [win]
   detect_binary_files_with_prefix: true
 
@@ -22,7 +22,7 @@ requirements:
     - openssl 1.0.*
     - pcre
     - yaml
-    - zlib 1.2.8
+    - zlib 1.2.11
   run:
     - python
     - jansson
