@@ -1,4 +1,4 @@
-{% set version = "2.0.15" %}
+{% set version = "2.0.16" %}
 
 package:
   name: uwsgi
@@ -6,17 +6,17 @@ package:
 
 source:
   url: https://pypi.io/packages/source/u/uWSGI/uwsgi-{{ version }}.tar.gz
-  sha256: 572ef9696b97595b4f44f6198fe8c06e6f4e6351d930d22e5330b071391272ff
+  sha256: a911f48f3cc51ac82fdabc4e001f18a32569128680beb5a833ebc3ff6edcc1f4
 
 build:
-  number: 2
+  number: 0
   skip: True  # [win]
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
     - python
-    - setuptools
+    - pip
     - jansson
     - libxml2 2.9.*  # [not win]
     - openssl 1.0.*
