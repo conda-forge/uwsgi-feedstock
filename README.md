@@ -17,14 +17,16 @@ protocols), proxies, process managers and monitors are all implemented.
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/uwsgi-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/uwsgi-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/uwsgi-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/uwsgi-feedstock)
-Windows: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/uwsgi-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/uwsgi-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/uwsgi-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/uwsgi-feedstock)
+![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/uwsgi/badges/version.svg)](https://anaconda.org/conda-forge/uwsgi)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/uwsgi/badges/downloads.svg)](https://anaconda.org/conda-forge/uwsgi)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-uwsgi-green.svg)](https://anaconda.org/conda-forge/uwsgi) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/uwsgi.svg)](https://anaconda.org/conda-forge/uwsgi) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/uwsgi.svg)](https://anaconda.org/conda-forge/uwsgi) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/uwsgi.svg)](https://anaconda.org/conda-forge/uwsgi) |
 
 Installing uwsgi
 ================

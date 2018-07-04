@@ -15,22 +15,25 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
     - python
     - pip
     - jansson
-    - libxml2 2.9.*  # [not win]
-    - openssl 1.0.*
+    - libxml2  # [not win]
+    - openssl
     - pcre
     - yaml
-    - zlib 1.2.11
+    - zlib
   run:
     - python
     - jansson
-    - libxml2 2.9.*  # [not win]
-    - openssl 1.0.*
+    - libxml2  # [not win]
+    - openssl
     - pcre
     - yaml
-    - zlib 1.2.11
+    - zlib
 
 test:
   source_files:
