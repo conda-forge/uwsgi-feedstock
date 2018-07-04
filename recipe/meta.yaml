@@ -9,28 +9,31 @@ source:
   sha256: 3dc2e9b48db92b67bfec1badec0d3fdcc0771316486c5efa3217569da3528bf2
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
     - python
     - pip
     - jansson
-    - libxml2 2.9.*  # [not win]
-    - openssl 1.0.*
+    - libxml2  # [not win]
+    - openssl
     - pcre
     - yaml
-    - zlib 1.2.11
+    - zlib
   run:
     - python
     - jansson
-    - libxml2 2.9.*  # [not win]
-    - openssl 1.0.*
+    - libxml2  # [not win]
+    - openssl
     - pcre
     - yaml
-    - zlib 1.2.11
+    - zlib
 
 test:
   source_files:
