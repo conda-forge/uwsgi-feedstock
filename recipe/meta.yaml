@@ -40,6 +40,7 @@ test:
     - .
   commands:
     - uwsgi --version
+    - uwsgi --plugin-list
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
     - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
