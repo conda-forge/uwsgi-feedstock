@@ -17,8 +17,7 @@ protocols), proxies, process managers and monitors are all implemented.
 Current build status
 ====================
 
-[![Linux](https://img.shields.io/circleci/project/github/conda-forge/uwsgi-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/uwsgi-feedstock)
-[![OSX](https://img.shields.io/travis/conda-forge/uwsgi-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/uwsgi-feedstock)
+[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/uwsgi-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/uwsgi-feedstock)
 ![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info

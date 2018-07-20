@@ -18,8 +18,8 @@ pin_run_as_build:
   openssl:
     max_pin: x.x.x
   python:
-    min_pin: x.x
     max_pin: x.x
+    min_pin: x.x
   zlib:
     max_pin: x.x
 python:
