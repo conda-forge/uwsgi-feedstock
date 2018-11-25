@@ -29,11 +29,6 @@ requirements:
   run:
     - python
     - jansson
-    - libxml2  # [not win]
-    - openssl
-    - pcre
-    - yaml
-    - zlib
 
 test:
   source_files:
