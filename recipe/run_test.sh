@@ -71,8 +71,8 @@ test_python() {
     echo -e "${bldyel}================== TESTING $1 =====================${txtrst}"
     echo -e "${bldyel}>>> Spawning uWSGI python app${txtrst}"
     echo -en "${bldred}"
-    pushd $SRC_DIR
-    $PREFIX/bin/uwsgi --master --http :8080 --exit-on-reload --touch-reload reload.txt --wsgi-file tests/staticfile.py --daemonize uwsgi.log
+    pushd tests
+    $PREFIX/bin/uwsgi --master --http :8080 --exit-on-reload --touch-reload reload.txt --wsgi-file staticfile.py --daemonize uwsgi.log
     echo -en "${txtrst}"
     http_test "http://localhost:8080/"
     popd
