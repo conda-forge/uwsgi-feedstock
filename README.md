@@ -18,14 +18,7 @@ Current build status
 ====================
 
 
-<table><tr>
-    <td>CircleCI</td>
-    <td>
-      <a href="https://circleci.com/gh/conda-forge/uwsgi-feedstock">
-        <img alt="OSX" src="https://img.shields.io/circleci/project/github/conda-forge/uwsgi-feedstock/master.svg?label=OSX">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
