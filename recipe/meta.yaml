@@ -9,7 +9,7 @@ source:
   sha256: 4972ac538800fb2d421027f49b4a1869b66048839507ccf0aa2fda792d99f583
 
 build:
-  number: 2
+  number: 3
   skip: True  # [win]
   detect_binary_files_with_prefix: true
 
@@ -26,11 +26,10 @@ requirements:
     - pcre
     - yaml
     - zlib
-    - icu 58.2
+    - icu
   run:
     - python
     - jansson
-    - icu 58.2
 
 test:
   source_files:
