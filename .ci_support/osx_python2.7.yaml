@@ -12,6 +12,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '4'
+icu:
+- '64.2'
 libxml2:
 - '2.9'
 macos_machine:
@@ -21,6 +23,8 @@ macos_min_version:
 openssl:
 - 1.1.1a
 pin_run_as_build:
+  icu:
+    max_pin: x
   libxml2:
     max_pin: x.x
   openssl:
