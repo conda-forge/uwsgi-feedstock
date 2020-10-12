@@ -19,26 +19,26 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - python
-    - pip
+    - icu
     - jansson
     - libpython-static
     - libxml2  # [not win]
     - openssl
     - pcre
+    - pip
+    - python
     - yaml
     - zlib
-    - icu
   run:
-    - python
     - jansson
+    - python
 
 test:
   source_files:
     - tests
   commands:
-    - uwsgi --version
     - uwsgi --plugin-list
+    - uwsgi --version
 
 about:
   home: https://github.com/unbit/uwsgi
