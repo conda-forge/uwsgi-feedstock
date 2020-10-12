@@ -22,6 +22,7 @@ requirements:
     - python
     - pip
     - jansson
+    - libpython-static
     - libxml2  # [not win]
     - openssl
     - pcre
