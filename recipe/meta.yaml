@@ -41,7 +41,7 @@ test:
 
 about:
   home: https://github.com/unbit/uwsgi
-  license: GPL-2.0
+  license: GPL-2.0-or-later
   license_file: LICENSE
   summary: |
     The uWSGI project aims at developing a full stack for building hosting
