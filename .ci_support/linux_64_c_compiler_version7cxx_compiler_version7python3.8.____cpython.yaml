@@ -19,8 +19,6 @@ libxml2:
 openssl:
 - 1.1.1
 pin_run_as_build:
-  icu:
-    max_pin: x
   libxml2:
     max_pin: x.x
   openssl:
@@ -32,5 +30,10 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - 3.8.* *_cpython
+target_platform:
+- linux-64
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
 zlib:
 - '1.2'
