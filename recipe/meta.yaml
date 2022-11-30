@@ -25,8 +25,8 @@ requirements:
     - jansson
     - libpython-static  # [py>=38]
     - libxml2  # [not win]
-    - openssl # [not linux]
-    - openssl=1.1.1 # [linux]
+    - openssl  # [not linux]
+    - openssl =1.1.1  # [linux]
     - pcre
     - pip
     - python
