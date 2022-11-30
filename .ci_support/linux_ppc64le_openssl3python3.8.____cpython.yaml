@@ -18,6 +18,8 @@ icu:
 - '70'
 libxml2:
 - '2.10'
+openssl:
+- '3'
 pcre:
 - '8'
 pin_run_as_build:
