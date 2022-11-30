@@ -1,9 +1,9 @@
+build_platform: {osx_arm64: osx_64}
 conda_forge_output_validation: true
-build_platform:
-  osx_arm64: osx_64
-  linux_ppc64le: linux_64
-  linux_aarch64: linux_64
-test: native_and_emulated
+provider: {linux_aarch64: default, linux_ppc64le: native}
+test_on_native_only: true
+azure:
+  store_build_artifacts: true
 github:
   branch_name: main
   tooling_branch_name: main
