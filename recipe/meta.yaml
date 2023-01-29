@@ -1,5 +1,5 @@
 {% set name = "uWSGI" %}
-{% set version = "2.0.20" %}
+{% set version = "2.0.21" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
-  sha256: 88ab9867d8973d8ae84719cf233b7dafc54326fcaec89683c3f9f77c002cdff9
+  sha256: 35a30d83791329429bc04fe44183ce4ab512fcf6968070a7bfba42fc5a0552a9
 
 build:
-  number: 3
+  number: 0
   skip: True  # [win]
   detect_binary_files_with_prefix: true
 
