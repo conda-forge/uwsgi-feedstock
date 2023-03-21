@@ -1,11 +1,11 @@
-About uwsgi
-===========
+About uwsgi-feedstock
+=====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/uwsgi-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/unbit/uwsgi
 
 Package license: GPL-2.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/uwsgi-feedstock/blob/main/LICENSE.txt)
 
 Summary: The uWSGI project aims at developing a full stack for building hosting
 services. Application servers (for various programming languages and
