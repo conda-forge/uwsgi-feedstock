@@ -1,12 +1,13 @@
+# uwsgi cannot cross-compile on Linux as it reads the kernel version
+build_platform:
+  osx_arm64: osx_64
+conda_build:
+  pkg_format: '2'
 conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
-build_platform:
-  osx_arm64: osx_64
 provider:
   linux_aarch64: default
   linux_ppc64le: default
 test: native_and_emulated
-conda_build:
-  pkg_format: '2'
