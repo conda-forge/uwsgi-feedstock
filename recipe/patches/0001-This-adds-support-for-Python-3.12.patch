@@ -1,0 +1,229 @@
+From 802aae57ff48362e69e38b6abf14fcd8b6dc15aa Mon Sep 17 00:00:00 2001
+From: Ralf Ertzinger <ralf@skytale.net>
+Date: Wed, 19 Jul 2023 19:42:31 +0200
+Subject: [PATCH] This adds support for Python 3.12
+
+The code compiles, and runs all my (admittedly pretty primitive) web
+applications. There may still be hidden issues in more complicated
+scenarios (like threading support).
+---
+ .github/workflows/test.yml     |  4 +-
+ plugins/python/python_plugin.c | 74 +++++++++++++++++++++++++---------
+ plugins/python/uwsgi_python.h  | 14 ++++++-
+ 3 files changed, 69 insertions(+), 23 deletions(-)
+
+diff --git a/.github/workflows/test.yml b/.github/workflows/test.yml
+index 739bed4..009d484 100644
+--- a/.github/workflows/test.yml
++++ b/.github/workflows/test.yml
+@@ -12,7 +12,7 @@ jobs:
+     runs-on: ubuntu-20.04
+     strategy:
+       matrix:
+-        python-version: ["2.7", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
++        python-version: ["2.7", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+         test-suite: [unittest, python, deadlocks]
+     steps:
+     - name: Add deadnakes ppa
+@@ -24,7 +24,7 @@ jobs:
+           libpcre3-dev libjansson-dev libcap2-dev \
+           curl check
+     - name: Install distutils
+-      if: contains(fromJson('["3.6","3.7","3.8","3.9","3.10","3.11"]'), matrix.python-version)
++      if: contains(fromJson('["3.6","3.7","3.8","3.9","3.10","3.11","3.12"]'), matrix.python-version)
+       run: |
+         sudo apt install --no-install-recommends -qqyf python${{ matrix.python-version }}-distutils \
+     - uses: actions/checkout@v2
+diff --git a/plugins/python/python_plugin.c b/plugins/python/python_plugin.c
+index 04cfdb5..c69abc1 100644
+--- a/plugins/python/python_plugin.c
++++ b/plugins/python/python_plugin.c
+@@ -197,6 +197,21 @@ void uwsgi_python_pthread_child(void) {
+ PyMethodDef uwsgi_spit_method[] = { {"uwsgi_spit", py_uwsgi_spit, METH_VARARGS, ""} };
+ PyMethodDef uwsgi_write_method[] = { {"uwsgi_write", py_uwsgi_write, METH_VARARGS, ""} };
+ 
++PyDoc_STRVAR(uwsgi_py_doc, "uWSGI api module.");
++
++#ifdef PYTHREE
++static PyModuleDef uwsgi_module3 = {
++	PyModuleDef_HEAD_INIT,
++	"uwsgi",
++	uwsgi_py_doc,
++	-1,
++	NULL,
++};
++PyObject *init_uwsgi3(void) {
++	return PyModule_Create(&uwsgi_module3);
++}
++#endif
++
+ int uwsgi_python_init() {
+ 
+ 	char *pyversion = strchr(Py_GetVersion(), '\n');
+@@ -261,6 +276,9 @@ pep405:
+ 	wchar_t *pname = uwsgi_calloc(sizeof(wchar_t) * (strlen(program_name)+1));
+ 	mbstowcs(pname, program_name, strlen(program_name)+1);
+ 	Py_SetProgramName(pname);
++#ifdef UWSGI_PY312
++	PyImport_AppendInittab("uwsgi", init_uwsgi3);
++#endif
+ #else
+ 	Py_SetProgramName(program_name);
+ #endif
+@@ -623,21 +641,6 @@ next:
+ 
+ 
+ 
+-PyDoc_STRVAR(uwsgi_py_doc, "uWSGI api module.");
+-
+-#ifdef PYTHREE
+-static PyModuleDef uwsgi_module3 = {
+-	PyModuleDef_HEAD_INIT,
+-	"uwsgi",
+-	uwsgi_py_doc,
+-	-1,
+-	NULL,
+-};
+-PyObject *init_uwsgi3(void) {
+-	return PyModule_Create(&uwsgi_module3);
+-}
+-#endif
+-
+ void init_uwsgi_embedded_module() {
+ 	PyObject *new_uwsgi_module, *zero;
+ 	int i;
+@@ -658,7 +661,9 @@ void init_uwsgi_embedded_module() {
+ 
+ 
+ #ifdef PYTHREE
++#ifndef UWSGI_PY312
+ 	PyImport_AppendInittab("uwsgi", init_uwsgi3);
++#endif
+ 	new_uwsgi_module = PyImport_AddModule("uwsgi");
+ #else
+ 	new_uwsgi_module = Py_InitModule3("uwsgi", NULL, uwsgi_py_doc);
+@@ -1161,7 +1166,10 @@ void uwsgi_python_init_apps() {
+ 
+ 	// prepare for stack suspend/resume
+ 	if (uwsgi.async > 1) {
+-#ifdef UWSGI_PY311
++#ifdef UWSGI_PY312
++		up.current_c_recursion_remaining = uwsgi_malloc(sizeof(int)*uwsgi.async);
++		up.current_py_recursion_remaining = uwsgi_malloc(sizeof(int)*uwsgi.async);
++#elif defined UWSGI_PY311
+ 		up.current_recursion_remaining = uwsgi_malloc(sizeof(int)*uwsgi.async);
+ #else
+ 		up.current_recursion_depth = uwsgi_malloc(sizeof(int)*uwsgi.async);
+@@ -1324,7 +1332,12 @@ void uwsgi_python_pre_uwsgi_fork() {
+ 		// Acquire the gil and import lock before forking in order to avoid
+ 		// deadlocks in workers
+ 		UWSGI_GET_GIL
++#if defined UWSGI_PY312
++		PyInterpreterState *interp = PyInterpreterState_Get();
++		_PyImport_AcquireLock(interp);
++#else
+ 		_PyImport_AcquireLock();
++#endif
+ 	}
+ }
+ 
+@@ -1336,7 +1349,12 @@ void uwsgi_python_post_uwsgi_fork(int step) {
+ 	if (uwsgi.has_threads) {
+ 		if (step == 0) {
+ 			// Release locks within master process
++#if defined UWSGI_PY312
++			PyInterpreterState *interp = PyInterpreterState_Get();
++			_PyImport_ReleaseLock(interp);
++#else
+ 			_PyImport_ReleaseLock();
++#endif
+ 			UWSGI_RELEASE_GIL
+ 		}
+ 		else {
+@@ -1592,7 +1610,11 @@ void uwsgi_python_suspend(struct wsgi_request *wsgi_req) {
+ 	PyGILState_Release(pgst);
+ 
+ 	if (wsgi_req) {
+-#ifdef UWSGI_PY311
++#ifdef UWSGI_PY312
++		up.current_c_recursion_remaining[wsgi_req->async_id] = tstate->c_recursion_remaining;
++		up.current_py_recursion_remaining[wsgi_req->async_id] = tstate->py_recursion_remaining;
++		up.current_frame[wsgi_req->async_id] = tstate->cframe;
++#elif defined UWSGI_PY311
+ 		up.current_recursion_remaining[wsgi_req->async_id] = tstate->recursion_remaining;
+ 		up.current_frame[wsgi_req->async_id] = tstate->cframe;
+ #else
+@@ -1601,7 +1623,11 @@ void uwsgi_python_suspend(struct wsgi_request *wsgi_req) {
+ #endif
+ 	}
+ 	else {
+-#ifdef UWSGI_PY311
++#ifdef UWSGI_PY312
++		up.current_main_c_recursion_remaining = tstate->c_recursion_remaining;
++		up.current_main_py_recursion_remaining = tstate->py_recursion_remaining;
++		up.current_main_frame = tstate->cframe;
++#elif defined UWSGI_PY311
+ 		up.current_main_recursion_remaining = tstate->recursion_remaining;
+ 		up.current_main_frame = tstate->cframe;
+ #else
+@@ -1835,7 +1861,11 @@ void uwsgi_python_resume(struct wsgi_request *wsgi_req) {
+ 	PyGILState_Release(pgst);
+ 
+ 	if (wsgi_req) {
+-#ifdef UWSGI_PY311
++#ifdef UWSGI_PY312
++		tstate->c_recursion_remaining = up.current_c_recursion_remaining[wsgi_req->async_id];
++		tstate->py_recursion_remaining = up.current_py_recursion_remaining[wsgi_req->async_id];
++		tstate->cframe = up.current_frame[wsgi_req->async_id];
++#elif defined UWSGI_PY311
+ 		tstate->recursion_remaining = up.current_recursion_remaining[wsgi_req->async_id];
+ 		tstate->cframe = up.current_frame[wsgi_req->async_id];
+ #else
+@@ -1844,7 +1874,11 @@ void uwsgi_python_resume(struct wsgi_request *wsgi_req) {
+ #endif
+ 	}
+ 	else {
+-#ifdef UWSGI_PY311
++#ifdef UWSGI_PY312
++		tstate->c_recursion_remaining = up.current_main_c_recursion_remaining;
++		tstate->py_recursion_remaining = up.current_main_py_recursion_remaining;
++		tstate->cframe = up.current_main_frame;
++#elif defined UWSGI_PY311
+ 		tstate->recursion_remaining = up.current_main_recursion_remaining;
+ 		tstate->cframe = up.current_main_frame;
+ #else
+diff --git a/plugins/python/uwsgi_python.h b/plugins/python/uwsgi_python.h
+index fa98843..2a45a2b 100644
+--- a/plugins/python/uwsgi_python.h
++++ b/plugins/python/uwsgi_python.h
+@@ -21,6 +21,10 @@
+ #  define UWSGI_PY311
+ #endif
+ 
++#if (PY_VERSION_HEX >= 0x030c0000)
++#  define UWSGI_PY312
++#endif
++
+ #if PY_MAJOR_VERSION == 2 && PY_MINOR_VERSION < 7
+ #define HAS_NOT_PyMemoryView_FromBuffer
+ #endif
+@@ -168,7 +172,15 @@ struct uwsgi_python {
+ 
+ 	char *callable;
+ 
+-#ifdef UWSGI_PY311
++#ifdef UWSGI_PY312
++	int *current_c_recursion_remaining;
++	int *current_py_recursion_remaining;
++	_PyCFrame **current_frame;
++
++	int current_main_c_recursion_remaining;
++	int current_main_py_recursion_remaining;
++	_PyCFrame *current_main_frame;
++#elif defined UWSGI_PY311
+ 	int *current_recursion_remaining;
+ 	_PyCFrame **current_frame;
+ 
+-- 
+2.39.3 (Apple Git-145)
+
