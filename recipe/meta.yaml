@@ -12,7 +12,7 @@ source:
     - patches/0001-This-adds-support-for-Python-3.12.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   detect_binary_files_with_prefix: true
 
