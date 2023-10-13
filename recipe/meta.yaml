@@ -8,6 +8,8 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
   sha256: 4cc4727258671ac5fa17ab422155e9aaef8a2008ebb86e4404b66deaae965db2
+  patches:
+    - patches/0001-This-adds-support-for-Python-3.12.patch
 
 build:
   number: 2
@@ -23,7 +25,7 @@ requirements:
   host:
     - icu
     - jansson
-    - libpython-static  # [py>=38]
+    - libpython-static
     - libxml2  # [not win]
     - openssl
     - pcre
