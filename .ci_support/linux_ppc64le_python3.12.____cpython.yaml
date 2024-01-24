@@ -17,7 +17,7 @@ docker_image:
 icu:
 - '73'
 libxml2:
-- '2.11'
+- '2'
 openssl:
 - '3'
 pcre:
