@@ -30,6 +30,7 @@ requirements:
     - pcre2
     - pip
     - python
+    - setuptools
     - yaml
     - zlib
   run:
