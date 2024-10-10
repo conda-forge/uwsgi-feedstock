@@ -28,8 +28,8 @@ libxml2:
 - '2'
 openssl:
 - '3'
-pcre:
-- '8'
+pcre2:
+- '10.44'
 pin_run_as_build:
   python:
     min_pin: x.x
