@@ -27,7 +27,7 @@ requirements:
     - libpython-static
     - libxml2  # [not win]
     - openssl
-    - pcre
+    - pcre2
     - pip
     - python
     - yaml
