@@ -10,4 +10,5 @@ if [[ "${target_platform}" == linux-* ]]; then
   export LDFLAGS="${LDFLAGS} -Wl,--no-as-needed"
 fi
 
+${PYTHON} -c 'import os; print("UNAME", os.uname())'
 UWSGI_EMBED_PLUGINS=stats_pusher_statsd ${PYTHON} -m pip install . --no-deps -vv
