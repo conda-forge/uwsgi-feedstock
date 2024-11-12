@@ -8,6 +8,7 @@ export LDFLAGS="-L${PREFIX}/lib ${LDFLAGS}"
 
 if [[ "${target_platform}" == linux-* ]]; then
   export LDFLAGS="${LDFLAGS} -Wl,--no-as-needed"
+  export UWSGI_PROFILE="${RECIPE_DIR}/uwsgi_config_linux.ini"
 fi
 
 ${PYTHON} -c 'import os; print("UNAME", os.uname())'
