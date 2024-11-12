@@ -11,5 +11,4 @@ if [[ "${target_platform}" == linux-* ]]; then
   export UWSGI_PROFILE="${RECIPE_DIR}/uwsgi_config_linux.ini"
 fi
 
-${PYTHON} -c 'import os; print("UNAME", os.uname())'
 UWSGI_EMBED_PLUGINS=stats_pusher_statsd ${PYTHON} -m pip install . --no-deps -vv
