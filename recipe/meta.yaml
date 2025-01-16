@@ -41,7 +41,7 @@ requirements:
 
 test:
   requires:
-    - procps-ng
+    - procps-ng  # [linux]
   source_files:
     - tests
   commands:
