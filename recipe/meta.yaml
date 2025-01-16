@@ -40,6 +40,8 @@ requirements:
     - python
 
 test:
+  requires:
+    - procps-ng
   source_files:
     - tests
   commands:
