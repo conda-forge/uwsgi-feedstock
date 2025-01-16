@@ -20,6 +20,8 @@ cxx_compiler_version:
 - '18'
 icu:
 - '75'
+liblzma_devel:
+- '5'
 libxml2:
 - '2'
 macos_machine:
