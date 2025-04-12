@@ -23,7 +23,7 @@ icu:
 liblzma_devel:
 - '5'
 libxml2:
-- '2'
+- '2.13'
 openssl:
 - '3'
 pcre2:

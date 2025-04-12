@@ -23,7 +23,7 @@ icu:
 liblzma_devel:
 - '5'
 libxml2:
-- '2'
+- '2.13'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 openssl:
