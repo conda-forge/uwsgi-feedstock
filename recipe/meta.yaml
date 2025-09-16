@@ -27,7 +27,7 @@ requirements:
     - liblzma-devel
     - libpython-static
     - libxcrypt
-    - libxml2  # [not win]
+    - libxml2-devel  # [not win]
     - openssl
     - pcre2
     - pip
