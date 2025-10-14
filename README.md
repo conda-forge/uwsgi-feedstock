@@ -300,4 +300,5 @@ Feedstock Maintainers
 
 * [@kalefranz](https://github.com/kalefranz/)
 * [@ocefpaf](https://github.com/ocefpaf/)
+* [@xhochy](https://github.com/xhochy/)
 
