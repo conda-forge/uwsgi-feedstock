@@ -11,7 +11,6 @@ Summary: The uWSGI project aims at developing a full stack for building hosting
 services. Application servers (for various programming languages and
 protocols), proxies, process managers and monitors are all implemented.
 
-
 Current build status
 ====================
 
