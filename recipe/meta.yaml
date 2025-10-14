@@ -10,7 +10,7 @@ source:
   sha256: c12aa652124f062ac216077da59f6d247bd7ef938234445881552e58afb1eb5f
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   detect_binary_files_with_prefix: true
 
@@ -61,3 +61,4 @@ extra:
   recipe-maintainers:
     - kalefranz
     - ocefpaf
+    - xhochy
