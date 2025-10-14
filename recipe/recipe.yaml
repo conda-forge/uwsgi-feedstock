@@ -50,12 +50,14 @@ tests:
   - files:
       source:
         - tests
+      recipe:
+        - run_test.sh
     requirements:
       run:
         - if: linux
           then: procps-ng
     script:
-      - uwsgi --plugin-list
+      - ./run_test.sh
       - uwsgi --version
 
 about:
