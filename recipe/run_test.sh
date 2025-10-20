@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -exuo pipefail
+set -exo pipefail
 
 if [[ -n "$TERM" && "$TERM" != dumb ]]; then
     txtund=$(tput sgr 0 1)          # underline
