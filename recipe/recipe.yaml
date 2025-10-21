@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: uWSGI
-  version: 2.0.30
+  version: 2.0.31
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name|lower }}-${{ version }}.tar.gz
-  sha256: c12aa652124f062ac216077da59f6d247bd7ef938234445881552e58afb1eb5f
+  sha256: e8f8b350ccc106ff93a65247b9136f529c14bf96b936ac5b264c6ff9d0c76257
 
 build:
-  number: 2
+  number: 0
   skip: win
   prefix_detection:
     ignore_binary_files: true

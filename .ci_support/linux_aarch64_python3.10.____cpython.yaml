@@ -23,7 +23,7 @@ liblzma_devel:
 libxml2_devel:
 - '2.14'
 openssl:
-- '3'
+- '3.5'
 pcre2:
 - '10.46'
 pin_run_as_build:
