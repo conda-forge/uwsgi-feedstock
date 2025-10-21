@@ -27,7 +27,7 @@ libxml2_devel:
 macos_machine:
 - arm64-apple-darwin20.0.0
 openssl:
-- '3'
+- '3.5'
 pcre2:
 - '10.46'
 pin_run_as_build:
