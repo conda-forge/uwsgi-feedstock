@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set +x
+set -exo pipefail
 
 if [[ -n "$TERM" && "$TERM" != dumb ]]; then
     txtund=$(tput sgr 0 1)          # underline
@@ -65,23 +65,15 @@ http_test() {
 }
 
 
-test_python() {
-    date > reload.txt
-    rm -f uwsgi.log
-    echo -e "${bldyel}================== TESTING $1 =====================${txtrst}"
-    echo -e "${bldyel}>>> Spawning uWSGI python app${txtrst}"
-    echo -en "${bldred}"
-    pushd tests
-    $PREFIX/bin/uwsgi --master --http :8080 --exit-on-reload --touch-reload reload.txt --wsgi-file staticfile.py --daemonize uwsgi.log
-    echo -en "${txtrst}"
-    http_test "http://localhost:8080/"
-    popd
-    echo -e "${bldyel}===================== DONE $1 =====================${txtrst}\n\n"
-}
-
-
-test_python $CONDA_PY
-
+date > reload.txt
+rm -f uwsgi.log
+echo -e "${bldyel}>>> Spawning uWSGI python app${txtrst}"
+echo -en "${bldred}"
+pushd tests
+$PREFIX/bin/uwsgi --master --http-socket 0.0.0.0:8080 --exit-on-reload --touch-reload reload.txt --wsgi-file staticfile.py --daemonize uwsgi.log
+echo -en "${txtrst}"
+http_test "http://localhost:8080/"
+popd
 
 echo "${bldgre}>>> $SUCCESS SUCCESSFUL PLUGIN(S)${txtrst}"
 if [ $ERROR -ge 1 ]; then
