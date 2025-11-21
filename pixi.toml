@@ -47,6 +47,12 @@ description = "Build uwsgi-feedstock with variant linux_64_python3.13.____cp313 
 [tasks."inspect-linux_64_python3.13.____cp313"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.13.____cp313.yaml"
 description = "List contents of uwsgi-feedstock packages built for variant linux_64_python3.13.____cp313"
+[tasks."build-linux_64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.14.____cp314.yaml"
+description = "Build uwsgi-feedstock with variant linux_64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-linux_64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.14.____cp314.yaml"
+description = "List contents of uwsgi-feedstock packages built for variant linux_64_python3.14.____cp314"
 [tasks."build-linux_aarch64_python3.10.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_python3.10.____cpython.yaml"
 description = "Build uwsgi-feedstock with variant linux_aarch64_python3.10.____cpython directly (without setup scripts)"
@@ -71,6 +77,12 @@ description = "Build uwsgi-feedstock with variant linux_aarch64_python3.13.____c
 [tasks."inspect-linux_aarch64_python3.13.____cp313"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_python3.13.____cp313.yaml"
 description = "List contents of uwsgi-feedstock packages built for variant linux_aarch64_python3.13.____cp313"
+[tasks."build-linux_aarch64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_python3.14.____cp314.yaml"
+description = "Build uwsgi-feedstock with variant linux_aarch64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_python3.14.____cp314.yaml"
+description = "List contents of uwsgi-feedstock packages built for variant linux_aarch64_python3.14.____cp314"
 [tasks."build-linux_ppc64le_python3.10.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_ppc64le_python3.10.____cpython.yaml"
 description = "Build uwsgi-feedstock with variant linux_ppc64le_python3.10.____cpython directly (without setup scripts)"
@@ -95,6 +107,12 @@ description = "Build uwsgi-feedstock with variant linux_ppc64le_python3.13.____c
 [tasks."inspect-linux_ppc64le_python3.13.____cp313"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_python3.13.____cp313.yaml"
 description = "List contents of uwsgi-feedstock packages built for variant linux_ppc64le_python3.13.____cp313"
+[tasks."build-linux_ppc64le_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_ppc64le_python3.14.____cp314.yaml"
+description = "Build uwsgi-feedstock with variant linux_ppc64le_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-linux_ppc64le_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_python3.14.____cp314.yaml"
+description = "List contents of uwsgi-feedstock packages built for variant linux_ppc64le_python3.14.____cp314"
 [tasks."build-osx_64_python3.10.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.10.____cpython.yaml"
 description = "Build uwsgi-feedstock with variant osx_64_python3.10.____cpython directly (without setup scripts)"
@@ -119,6 +137,12 @@ description = "Build uwsgi-feedstock with variant osx_64_python3.13.____cp313 di
 [tasks."inspect-osx_64_python3.13.____cp313"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.13.____cp313.yaml"
 description = "List contents of uwsgi-feedstock packages built for variant osx_64_python3.13.____cp313"
+[tasks."build-osx_64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.14.____cp314.yaml"
+description = "Build uwsgi-feedstock with variant osx_64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-osx_64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.14.____cp314.yaml"
+description = "List contents of uwsgi-feedstock packages built for variant osx_64_python3.14.____cp314"
 [tasks."build-osx_arm64_python3.10.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.10.____cpython.yaml"
 description = "Build uwsgi-feedstock with variant osx_arm64_python3.10.____cpython directly (without setup scripts)"
@@ -143,6 +167,12 @@ description = "Build uwsgi-feedstock with variant osx_arm64_python3.13.____cp313
 [tasks."inspect-osx_arm64_python3.13.____cp313"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.13.____cp313.yaml"
 description = "List contents of uwsgi-feedstock packages built for variant osx_arm64_python3.13.____cp313"
+[tasks."build-osx_arm64_python3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.14.____cp314.yaml"
+description = "Build uwsgi-feedstock with variant osx_arm64_python3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-osx_arm64_python3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.14.____cp314.yaml"
+description = "List contents of uwsgi-feedstock packages built for variant osx_arm64_python3.14.____cp314"
 
 [feature.smithy.dependencies]
 conda-smithy = "*"
