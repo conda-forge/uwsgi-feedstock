@@ -13,7 +13,7 @@ source:
   sha256: e8f8b350ccc106ff93a65247b9136f529c14bf96b936ac5b264c6ff9d0c76257
 
 build:
-  number: 0
+  number: 1
   skip: win
   prefix_detection:
     ignore_binary_files: true
@@ -24,7 +24,7 @@ requirements:
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
     - if: build_platform != target_platform
-      then: 
+      then:
         - python
         - cross-python_${{ target_platform }}
   host:
